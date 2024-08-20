@@ -1,0 +1,31 @@
+name: Convert WEBP to PNG
+
+on:
+  push:
+    paths:
+      - ./postmoterm_flow_chart.webp  
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install ImageMagick
+      run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+    - name: Convert WEBP to PNG
+      run: |
+        for file in $(find path/to/webp/files -name "*.webp"); do
+          convert "$file" "${file%.webp}.png"
+        done
+
+    - name: Commit converted files
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add path/to/webp/files/*.png
+        git commit -m "Converted WEBP to PNG"
+        git push
