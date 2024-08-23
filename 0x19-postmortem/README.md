@@ -1,4 +1,4 @@
-#0x19-postmortem task using webstack debugging #1
+#0x19-postmortem task using webstack debugging
 #By Abubakar David Thomas
 
 
